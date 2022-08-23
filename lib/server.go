@@ -17,8 +17,12 @@ type Server struct {
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+
+	//Get a URL parameter.
+	p := r.FormValue("p")
+
 	// Start subprocess
-	cmd := exec.Command(s.Script[0], s.Script[1:]...)
+	cmd := exec.Command(s.Script[0], p)
 
 	// Get handles to subprocess stdin, stdout and stderr
 	stdinPipe, err := cmd.StdinPipe()
